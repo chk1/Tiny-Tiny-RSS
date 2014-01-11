@@ -139,10 +139,11 @@ class FeedItem_RSS extends FeedItem_Common {
 			$enc = new FeedEnclosure();
 
 			$content = $this->xpath->query("media:content", $enclosure)->item(0);
-
-			$enc->type = $content->getAttribute("type");
-			$enc->link = $content->getAttribute("url");
-			$enc->length = $content->getAttribute("length");
+			if($content) {
+				$enc->type = $content->getAttribute("type");
+				$enc->link = $content->getAttribute("url");
+				$enc->length = $content->getAttribute("length");	
+			}
 
 			$desc = $this->xpath->query("media:description", $content)->item(0);
 			if ($desc) {
